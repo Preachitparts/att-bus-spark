@@ -14,6 +14,238 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          amount: number
+          bus_id: string
+          created_at: string | null
+          destination_id: string
+          email: string
+          emergency_name: string
+          emergency_phone: string
+          full_name: string
+          id: string
+          passenger_class: string
+          payment_reference: string | null
+          phone: string
+          pickup_point_id: string
+          receipt_url: string | null
+          referral_id: string | null
+          seat_number: number
+          status: string
+          updated_at: string | null
+        }
+        Insert: {
+          amount: number
+          bus_id: string
+          created_at?: string | null
+          destination_id: string
+          email: string
+          emergency_name: string
+          emergency_phone: string
+          full_name: string
+          id?: string
+          passenger_class: string
+          payment_reference?: string | null
+          phone: string
+          pickup_point_id: string
+          receipt_url?: string | null
+          referral_id?: string | null
+          seat_number: number
+          status?: string
+          updated_at?: string | null
+        }
+        Update: {
+          amount?: number
+          bus_id?: string
+          created_at?: string | null
+          destination_id?: string
+          email?: string
+          emergency_name?: string
+          emergency_phone?: string
+          full_name?: string
+          id?: string
+          passenger_class?: string
+          payment_reference?: string | null
+          phone?: string
+          pickup_point_id?: string
+          receipt_url?: string | null
+          referral_id?: string | null
+          seat_number?: number
+          status?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_bus_id_fkey"
+            columns: ["bus_id"]
+            isOneToOne: false
+            referencedRelation: "buses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_destination_id_fkey"
+            columns: ["destination_id"]
+            isOneToOne: false
+            referencedRelation: "destinations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_pickup_point_id_fkey"
+            columns: ["pickup_point_id"]
+            isOneToOne: false
+            referencedRelation: "pickup_points"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_referral_id_fkey"
+            columns: ["referral_id"]
+            isOneToOne: false
+            referencedRelation: "referrals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bus_types: {
+        Row: {
+          active: boolean
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+          seat_count: number
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+          seat_count: number
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          seat_count?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      buses: {
+        Row: {
+          active: boolean
+          bus_type_id: string
+          created_at: string | null
+          id: string
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean
+          bus_type_id: string
+          created_at?: string | null
+          id?: string
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean
+          bus_type_id?: string
+          created_at?: string | null
+          id?: string
+          name?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "buses_bus_type_id_fkey"
+            columns: ["bus_type_id"]
+            isOneToOne: false
+            referencedRelation: "bus_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      destinations: {
+        Row: {
+          active: boolean
+          created_at: string | null
+          id: string
+          name: string
+          price: number
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string | null
+          id?: string
+          name: string
+          price?: number
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean
+          created_at?: string | null
+          id?: string
+          name?: string
+          price?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      pickup_points: {
+        Row: {
+          active: boolean
+          created_at: string | null
+          id: string
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string | null
+          id?: string
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean
+          created_at?: string | null
+          id?: string
+          name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      referrals: {
+        Row: {
+          active: boolean
+          created_at: string | null
+          id: string
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string | null
+          id?: string
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean
+          created_at?: string | null
+          id?: string
+          name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       roof_analyses: {
         Row: {
           confidence: number | null
@@ -50,12 +282,54 @@ export type Database = {
         }
         Relationships: []
       }
+      seats: {
+        Row: {
+          active: boolean
+          bus_id: string
+          created_at: string | null
+          id: string
+          seat_number: number
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean
+          bus_id: string
+          created_at?: string | null
+          id?: string
+          seat_number: number
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean
+          bus_id?: string
+          created_at?: string | null
+          id?: string
+          seat_number?: number
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seats_bus_id_fkey"
+            columns: ["bus_id"]
+            isOneToOne: false
+            referencedRelation: "buses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_seat_status: {
+        Args: { _bus_id: string }
+        Returns: {
+          seat_number: number
+          is_active: boolean
+          status: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
