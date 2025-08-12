@@ -151,10 +151,10 @@ export function BookingForm() {
   }
 
   return (
-    <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSubmit(onSubmit)}>
+    <form className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6" onSubmit={handleSubmit(onSubmit)}>
       <Card>
-        <CardContent className="space-y-4 pt-6">
-          <div className="grid gap-4 md:grid-cols-2">
+        <CardContent className="space-y-4 pt-4 sm:pt-6 px-4 sm:px-6">
+          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
             <div>
               <Label htmlFor="full_name">Full name</Label>
               <Input id="full_name" placeholder="e.g. Ama Mensah" {...register("full_name")} />
@@ -171,7 +171,7 @@ export function BookingForm() {
               </Select>
             </div>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
             <div>
               <Label htmlFor="email">Email</Label>
               <Input id="email" type="email" placeholder="you@example.com" {...register("email")} />
@@ -181,7 +181,7 @@ export function BookingForm() {
               <Input id="phone" placeholder="024..." {...register("phone")} />
             </div>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
             <div>
               <Label htmlFor="emergency_name">Emergency contact</Label>
               <Input id="emergency_name" placeholder="Name" {...register("emergency_name")} />
@@ -195,8 +195,8 @@ export function BookingForm() {
       </Card>
 
       <Card>
-        <CardContent className="space-y-4 pt-6">
-          <div className="grid gap-4 md:grid-cols-2">
+        <CardContent className="space-y-4 pt-4 sm:pt-6 px-4 sm:px-6">
+          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
             <div>
               <Label>Pickup point</Label>
               <Select onValueChange={(v) => setValue("pickup_point_id", v as any)}>
@@ -220,7 +220,7 @@ export function BookingForm() {
               </Select>
             </div>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
             <div>
               <Label>Referral</Label>
               <Select onValueChange={(v) => setValue("referral_id", v as any)}>
@@ -246,7 +246,7 @@ export function BookingForm() {
           </div>
 
           <div>
-            <Label className="mb-2 block">Choose seat</Label>
+            <Label className="mb-3 block text-sm font-medium">Choose your seat</Label>
             <SeatMap
               seats={seatStatus}
               selectedSeat={selectedSeat}
@@ -254,16 +254,16 @@ export function BookingForm() {
             />
           </div>
 
-          <div className="flex items-center justify-between pt-2">
-            <div className="text-sm text-muted-foreground">Amount</div>
-            <div className="text-lg font-semibold">GHS {amount.toFixed(2)}</div>
+          <div className="flex items-center justify-between pt-3 pb-2 border-t">
+            <div className="text-sm sm:text-base text-muted-foreground">Total Amount</div>
+            <div className="text-lg sm:text-xl font-bold text-primary">GHS {amount.toFixed(2)}</div>
           </div>
 
-          <div className="flex gap-3 pt-2">
-            <Button type="submit" variant="hero" disabled={submitting || !selectedSeat}>
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <Button type="submit" variant="hero" disabled={submitting || !selectedSeat} className="flex-1">
               {submitting ? "Booking..." : "Book Seat"}
             </Button>
-            <Button type="button" variant="outline" onClick={() => {
+            <Button type="button" variant="outline" className="flex-1" onClick={() => {
               toast({ title: "Enable payments", description: "Add Hubtel keys to enable payment & auto-confirmation." });
             }}>Proceed to Payment</Button>
           </div>

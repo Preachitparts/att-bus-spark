@@ -47,11 +47,13 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-sm sm:max-w-md">
         <CardHeader>
-          <CardTitle>{mode === "signin" ? "Admin sign in" : "Create admin account"}</CardTitle>
+          <CardTitle className="text-lg sm:text-xl text-center">
+            {mode === "signin" ? "Admin Sign In" : "Create Admin Account"}
+          </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-4 sm:px-6">
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <Label htmlFor="email">Email</Label>
@@ -65,11 +67,15 @@ export default function Auth() {
               {mode === "signin" ? "Sign in" : "Sign up"}
             </Button>
           </form>
-          <div className="mt-4 text-center text-sm text-muted-foreground">
+          <div className="mt-4 text-center text-xs sm:text-sm text-muted-foreground">
             {mode === "signin" ? (
-              <button className="underline" onClick={() => setMode("signup")}>Need an account? Sign up</button>
+              <button className="underline hover:text-foreground transition-colors" onClick={() => setMode("signup")}>
+                Need an account? Sign up
+              </button>
             ) : (
-              <button className="underline" onClick={() => setMode("signin")}>Already have an account? Sign in</button>
+              <button className="underline hover:text-foreground transition-colors" onClick={() => setMode("signin")}>
+                Already have an account? Sign in
+              </button>
             )}
           </div>
         </CardContent>

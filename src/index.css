@@ -101,4 +101,22 @@
     background-image: radial-gradient(1200px 400px at 10% -10%, hsl(var(--primary)/0.15), transparent),
       radial-gradient(1000px 300px at 90% -20%, hsl(var(--accent)/0.12), transparent);
   }
+  
+  /* Ensure proper touch targets on mobile */
+  @media (max-width: 640px) {
+    button, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+  
+  /* Smooth scrolling for mobile navigation */
+  .overflow-x-auto {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .overflow-x-auto::-webkit-scrollbar {
+    display: none;
+  }
 }

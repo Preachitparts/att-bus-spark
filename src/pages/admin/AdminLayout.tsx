@@ -27,17 +27,17 @@ export default function AdminLayout() {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen grid grid-cols-1 md:grid-cols-[240px_1fr]">
-      <aside className="border-r bg-sidebar px-4 py-6">
-        <div className="text-xl font-semibold mb-6">ATT Admin</div>
-        <nav className="space-y-2">
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-[240px_1fr]">
+      <aside className="border-r bg-sidebar px-4 py-4 sm:py-6 lg:block hidden">
+        <div className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">ATT Admin</div>
+        <nav className="space-y-1 sm:space-y-2">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.end as any}
               className={({ isActive }) =>
-                `block rounded-md px-3 py-2 text-sm ${isActive ? "bg-sidebar-accent text-sidebar-foreground font-medium" : "hover:bg-sidebar-accent"}`
+                `block rounded-md px-3 py-2 text-sm transition-colors ${isActive ? "bg-sidebar-accent text-sidebar-foreground font-medium" : "hover:bg-sidebar-accent"}`
               }
             >
               {item.label}
@@ -45,7 +45,27 @@ export default function AdminLayout() {
           ))}
         </nav>
       </aside>
-      <main className="p-6">
+      
+      {/* Mobile Navigation */}
+      <div className="lg:hidden border-b bg-sidebar p-4">
+        <div className="text-lg font-semibold mb-3">ATT Admin</div>
+        <nav className="flex overflow-x-auto gap-2 pb-2">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.end as any}
+              className={({ isActive }) =>
+                `whitespace-nowrap rounded-md px-3 py-2 text-xs transition-colors ${isActive ? "bg-sidebar-accent text-sidebar-foreground font-medium" : "hover:bg-sidebar-accent"}`
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+      </div>
+      
+      <main className="p-4 sm:p-6">
         <Outlet />
       </main>
     </div>
