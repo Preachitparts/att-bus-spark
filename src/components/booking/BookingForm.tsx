@@ -102,8 +102,29 @@ export function BookingForm() {
 
       if (error) throw error;
 
-      toast({ title: "Booking created", description: "Proceed to payment to confirm your seat." });
-      // For now, payment is pending Hubtel keys. Offer PDF ticket with Pending status.
+      toast({ title: "Booking created", description: "Redirecting to payment..." });
+
+      // Initiate Hubtel Checkout via Edge Function
+      const { data: payment, error: payErr } = await supabase.functions.invoke("hubtel-create-payment", {
+        body: {
+          bookingId: data?.id,
+          amount,
+          fullName: values.full_name,
+          email: values.email,
+          phone: values.phone,
+        },
+      });
+
+      if (payErr) {
+        toast({ title: "Payment init failed", description: payErr.message });
+      } else if ((payment as any)?.url) {
+        // Open checkout in a new tab (recommended)
+        window.open((payment as any).url as string, "_blank");
+      } else {
+        toast({ title: "Payment init failed", description: "No checkout URL returned." });
+      }
+
+      // Also offer a PDF ticket with Pending status (will update after callback)
       generatePDF(values.full_name, values.email, values.phone, values.seat_number, amount, "Pending");
       reset();
       setSelectedSeat(null);

@@ -1,1 +1,7 @@
 project_id = "llrumtjljzzhvqfxowpb"
+
+[functions.hubtel-create-payment]
+verify_jwt = false
+
+[functions.hubtel-webhook]
+verify_jwt = false
