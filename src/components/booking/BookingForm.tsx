@@ -263,9 +263,6 @@ export function BookingForm() {
             <Button type="submit" variant="hero" disabled={submitting || !selectedSeat} className="flex-1">
               {submitting ? "Booking..." : "Book Seat"}
             </Button>
-            <Button type="button" variant="outline" className="flex-1" onClick={() => {
-              toast({ title: "Enable payments", description: "Add Hubtel keys to enable payment & auto-confirmation." });
-            }}>Proceed to Payment</Button>
           </div>
         </CardContent>
       </Card>
